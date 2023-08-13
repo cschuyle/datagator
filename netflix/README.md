@@ -13,9 +13,9 @@
 1. Login to your Netflix in a browser, go to the DVD queue, and from the browser's **File** menu select **Save As ...** complete web page. This will produce the output file `DVD Netflix.html`
 
 
-2. Run the Extract script
+2. Run the Extract script. Provide the second argument if the exported HTML file is not in your current directory.
     ```console
-    $ ./extract.sh
+    $ ./extract.sh [DVD Netflix.html file location]
     ```
 
     This will produce the output files:

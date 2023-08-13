@@ -6,7 +6,7 @@ script_file=$(basename "$0")
 
 source "$script_dir/../shared/functions.sh"
 
-saved_html_file="DVD Netflix.html"
+saved_html_file=${1:-"$(pwd)/DVD Netflix.html"}
 
 if [[ ! -f $saved_html_file ]]; then
   echo "File not found: $saved_html_file. Go to your Netflix queue page in your browser, and save the web page to disk."

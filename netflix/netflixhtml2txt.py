@@ -34,25 +34,27 @@ def quote(s):
 def get_page(filename, section):
     with open(filename, 'r') as content_file:
         content = content_file.read()
-    soup = BS(content)
+    soup = BS(content, features="html.parser")
     active_list = soup.find("div", {"id": section})
-    titles = []
-    title_divs = active_list.findAll("div", {"class": "title"})
-    for title_div in title_divs:
-        for anchor in title_div.findAll("a"):
-            if (anchor.has_key('href')
-                    and anchor.text
-                    and anchor['href'].startswith('https://dvd.netflix.com/Movie/')):
-                titles.append(anchor.text)
-                # print(anchor.parent.parent.parent.parent.parent)
+    if active_list:
+        titles = []
+        title_divs = active_list.findAll("div", {"class": "title"})
+        for title_div in title_divs:
+            for anchor in title_div.findAll("a"):
+                if (anchor.has_key('href')
+                        and anchor.text
+                        and anchor['href'].startswith('https://dvd.netflix.com/Movie/')):
+                    titles.append(anchor.text)
+                    # print(anchor.parent.parent.parent.parent.parent)
 
-    return titles
+        return titles
 
 
 def get_all(filename, section):
     titles = get_page(filename, section)
-    print("Got {} titles".format(len(titles)), file=sys.stderr)
-    return titles
+    if titles:
+        print("Got {} titles".format(len(titles)), file=sys.stderr)
+        return titles
 
 
 def dump(titles):
@@ -63,8 +65,11 @@ def dump(titles):
 
 
 def squash_whitespace(title):
-    return re.sub('\s+', ' ', title)
+    if title:
+        return re.sub('\s+', ' ', title)
 
 
-titles = [squash_whitespace(title) for title in get_all(filename, section)]
-dump(titles)
+all_titles=get_all(filename, section)
+if all_titles:
+    titles = [squash_whitespace(title) for title in all_titles]
+    dump(titles)

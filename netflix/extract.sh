@@ -13,7 +13,6 @@ if [[ ! -f $saved_html_file ]]; then
   exit 1
 fi
 
-cd "$script_dir"
-python3 "./netflixhtml2txt.py" athomeList "$saved_html_file" >netflix-athome.txt
-python3 "./netflixhtml2txt.py" inqueueList "$saved_html_file" >netflix-queue.txt
-python3 "./netflixhtml2txt.py" savedList "$saved_html_file" >netflix-saved.txt
+python3 "$script_dir/netflixhtml2txt.py" athomeList "$saved_html_file" >netflix-athome.txt
+python3 "$script_dir/netflixhtml2txt.py" inqueueList "$saved_html_file" >netflix-queue.txt
+python3 "$script_dir/netflixhtml2txt.py" savedList "$saved_html_file" >netflix-saved.txt

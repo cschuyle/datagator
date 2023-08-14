@@ -7,3 +7,16 @@
 
 # Mac crap
 .DS_Store
+
+# My output
+netflix-athome.json
+netflix-athome.csv
+netflix-athome.txt
+
+netflix-queue.json
+netflix-queue.csv
+netflix-queue.txt
+
+netflix-saved.json
+netflix-saved.csv
+netflix-saved.txt

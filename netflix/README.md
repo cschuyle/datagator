@@ -8,6 +8,8 @@
     $ pip install requirements.txt
     ```
 
+3. `jq`
+
 ## Usage
 
 1. Login to your Netflix in a browser, go to the DVD queue, and from the browser's **File** menu select **Save As ...** complete web page. This will produce the output file `DVD Netflix.html`
@@ -19,6 +21,14 @@
     ```
 
     This will produce the output files:
+    
+        netflix-athome.json
+        netflix-queue.json
+        netflix-saved.json
+    
+        netflix-athome.csv
+        netflix-queue.csv
+        netflix-saved.csv
     
         netflix-athome.txt
         netflix-queue.txt

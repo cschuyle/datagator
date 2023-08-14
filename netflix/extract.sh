@@ -13,6 +13,14 @@ if [[ ! -f $saved_html_file ]]; then
   exit 1
 fi
 
-python3 "$script_dir/netflixhtml2txt.py" athomeList "$saved_html_file" >netflix-athome.txt
-python3 "$script_dir/netflixhtml2txt.py" inqueueList "$saved_html_file" >netflix-queue.txt
-python3 "$script_dir/netflixhtml2txt.py" savedList "$saved_html_file" >netflix-saved.txt
+python3 "$script_dir/netflixhtml2json.py" athomeList "$saved_html_file" >netflix-athome.json
+python3 "$script_dir/netflixhtml2json.py" inqueueList "$saved_html_file" >netflix-queue.json
+python3 "$script_dir/netflixhtml2json.py" savedList "$saved_html_file" >netflix-saved.json
+
+"${script_dir}"/netflixjson2csv.sh netflix-athome.json >netflix-athome.csv
+"${script_dir}"/netflixjson2csv.sh netflix-queue.json >netflix-queue.csv
+"${script_dir}"/netflixjson2csv.sh netflix-saved.json >netflix-saved.csv
+
+"${script_dir}"/netflixjson2txt.sh netflix-athome.json >netflix-athome.txt
+"${script_dir}"/netflixjson2txt.sh netflix-queue.json >netflix-queue.txt
+"${script_dir}"/netflixjson2txt.sh netflix-saved.json >netflix-saved.txt

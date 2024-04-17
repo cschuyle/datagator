@@ -3,7 +3,6 @@
 Datagator is a lightweight flexible framework to ingest, store, and analyze Data about Data 
 
 ## Ingestion
-
 A collection of scripts to extract, transform, and publish data from a number of websites.
 
 ## Usage

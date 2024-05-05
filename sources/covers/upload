@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -o errexit # set -e
 set -o pipefail
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 script_file=$(basename "$0")
+
+imagesdir="$1"
+echo "IMAGES DIR $imagesdir" 1>&2
 
 source "$script_dir/../../shared/functions.sh"
 
@@ -32,14 +35,7 @@ cp /dev/null "$json_file"
 mkdir -p "$destdir"/1500
 mkdir -p "$destdir"/150
 
-for filename in $srcdir/*; do
-
-  if [[ ! "$filename" =~ \.gif$ ]]; then
-   echo "... covers upload: SKIP NON-IMAGE FILE: $filename" 1>&2
-   continue
-  fi
-
-  echo ... covers upload IMAGE FILE: $filename 1>&2
+for filename in $imagesdir/*; do
 
   ## Rename to canonical, and create thumbnail
 
@@ -55,7 +51,13 @@ for filename in $srcdir/*; do
   title="$(basename "$title" .gif)"
   title="$(basename "$title" .webp)"
 
-  echo ... covers upload RAW TITLE: $title 1>&1
+  if [[ "$base_filename" == "$title" ]]; then
+    echo "... covers upload: SKIP NON-IMAGE FILE: $filename" 1>&2
+    continue
+  fi
+
+  echo ... covers upload IMAGE FILE: $filename 1>&2
+  echo ... covers upload RAW TITLE: $title 1>&2
 
   export IFS=$'\n'
   title_language=($("$script_dir/title-language.pl" "$title"))
@@ -78,22 +80,20 @@ for filename in $srcdir/*; do
   cp "$filename" "$f1500"
 
   os='other'
-  if [[ "$os" == "macos" ]]
-  then
+  if [[ "$os" == "macos" ]]; then
     magick convert "$f1500" -thumbnail 200x200 "$f150"
   else
     convert "$f1500" -thumbnail 200x200 "$f150"
   fi
   ## Upload to AWS
-set -x
+  set -x
   aws s3 cp "$f1500" "s3://moocho-test/public/$bucket/images/1500/$canon_filename"
   aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/1500/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers
 
   aws s3 cp "$f150" "s3://moocho-test/public/$bucket/images/150/$canon_filename"
   aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/150/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers
-set +x
+  set +x
   ## Output JSON snippet
-
 
   cat >>"$json_file" <<EOF
     {
@@ -106,6 +106,6 @@ set +x
     },
 EOF
 
-echo "... covers upload: Output file: $json_file" 1>&2
+  echo "... covers upload: Output file: $json_file" 1>&2
 
 done

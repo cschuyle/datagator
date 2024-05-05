@@ -6,15 +6,19 @@ import subprocess
 
 
 def exit_usage(command):
-    if(command and command.lower() != "help"):
-        print(f"Unknown command: {command}")
+    exitcode = -1
+    if(command):
+        if(command.lower() == "help"):
+            exitcode = 0
+        else:
+            print(f"Unknown command: {command}")
     
     print("""Usage:
     dg PP-1234                          # download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
     dg covers DIRECTORY OF IMAGES       # upload artifacts (covers) to S3, save the metadata to a file
     dg pdfs DIRECTORY OF DIRECTORIES    # upload PDF file(s) (and optionally a cover image), output metadata to a file
 """, file=sys.stderr)
-    sys.exit(-1)
+    sys.exit(exitcode)
 
 
 if len(sys.argv) < 2:
@@ -34,11 +38,11 @@ for i in range(1, len(sys.argv)):
         ppid = match.group(1)
         print("Command: Scrape from Little Prince Collection PP id " + ppid, file=sys.stderr)
         process = subprocess.run([f"{sourcepath}/pp/scrape", ppid])
-        sys.exit(process.returncode)
 
     elif command == 'covers':
         print("Command: Upload covers", file=sys.stderr)
-        process = subprocess.run(f"{sourcepath}/covers/upload")
+        command = f"{sourcepath}/covers/upload", *sys.argv[2::len(sys.argv)]
+        process = subprocess.run(command)
         sys.exit(process.returncode)
 
     elif command == 'pdfs':

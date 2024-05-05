@@ -38,11 +38,11 @@ for i in range(1, len(sys.argv)):
     if match and match.group(1):
         ppid = match.group(1)
         print("Command: Get metadata from Little Prince Collection (of Jean-Marc Probst), for PP id " + ppid, file=sys.stderr)
-        process = subprocess.run([f"{sourcepath}/pp/scrape", ppid])
+        process = subprocess.run([f"{sourcepath}/pp/scrape.sh", ppid])
 
     elif command == 'covers':
         print("Command: Upload covers", file=sys.stderr)
-        command = f"{sourcepath}/covers/upload", *sys.argv[2::len(sys.argv)]
+        command = f"{sourcepath}/covers/upload.sh", *sys.argv[2::len(sys.argv)]
         process = subprocess.run(command)
         sys.exit(process.returncode)
 

@@ -14,9 +14,10 @@ def exit_usage(command):
             print(f"Unknown command: {command}")
     
     print("""Usage:
-    dg PP-1234                          # download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
-    dg covers DIRECTORY OF IMAGES       # upload artifacts (covers) to S3, save the metadata to a file
-    dg pdfs DIRECTORY OF DIRECTORIES    # upload PDF file(s) (and optionally a cover image), output metadata to a file
+    dg PP-1234 ...                      # Download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
+    dg covers [DIRECTORY OF IMAGES]     # Upload artifacts (covers) to S3, save the metadata to a file
+    dg pdfs [DIRECTORY OF DIRECTORIES]  # Upload PDF file(s) (and optionally a cover image), output metadata to a file
+    dg tintenfass                       # Get Little Prince titles from Verlag Editorial Tintenfaß
 """, file=sys.stderr)
     sys.exit(exitcode)
 
@@ -36,7 +37,7 @@ for i in range(1, len(sys.argv)):
     match = re.search(r"""^PP-(\d+)$""", command)
     if match and match.group(1):
         ppid = match.group(1)
-        print("Command: Scrape from Little Prince Collection PP id " + ppid, file=sys.stderr)
+        print("Command: Get metadata from Little Prince Collection (of Jean-Marc Probst), for PP id " + ppid, file=sys.stderr)
         process = subprocess.run([f"{sourcepath}/pp/scrape", ppid])
 
     elif command == 'covers':
@@ -48,6 +49,13 @@ for i in range(1, len(sys.argv)):
     elif command == 'pdfs':
         print("Command: Upload PDFs", file=sys.stderr)
         command = [f"{sourcepath}/pdfs/pdfs.py", *sys.argv[2::len(sys.argv)]]
+        # print("COMMAND: ", command)
+        process = subprocess.run(command)
+        sys.exit(process.returncode)
+
+    elif command == 'tintenfass':
+        print("Command: Get Little Prince titles from Verlag Editorial Tintenfaß", file=sys.stderr)
+        command = [f"{sourcepath}/tintenfass/get-little-prince-list.sh"]
         # print("COMMAND: ", command)
         process = subprocess.run(command)
         sys.exit(process.returncode)

@@ -21,3 +21,6 @@ netflix-saved.json
 netflix-saved.csv
 netflix-saved.txt
 tmp
+
+# direnv
+.envrc

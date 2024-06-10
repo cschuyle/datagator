@@ -32,12 +32,12 @@ val=$(
     perl -pe 's/<.?[^>+]+>//g' | \
     perl -pe 's/^\s*//' | \
     perl -pe 's/\s*$//'
-    ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; fi
+    ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
 
 val=$(
     cat "$lpid.html" | \
     grep '<title>' | perl -ne '/\/(.+)\/.*?\d{4}/ and print $1 or die "HORRIBLY";' | perl -pe 's/&nbsp;//g;'
-    ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; fi
+    ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
 
 
 val=$(cat $lpid.html|grep -B 2 -A 2 '>Translator(s):<'|tail -1|perl -pe 's/<[^>+]+>//g' | perl -pe 's/^\s*//' | perl -pe 's/\s*$//') && echo "  \"translator\": \"$val\"," >> "PP-$lpid.json"
@@ -50,11 +50,12 @@ echo "  \"lpid\": \"PP-$lpid\"" >> "PP-$lpid.json"
 
 cover=$(cat $lpid.html|perl -ne '/href="(.+_XXL[^"]+)"/ && print "$1\n";' | head -1) 
 
-echo COVERS $cover
+echo COVERS $cover 1>&2
 
 cover_url="$url/$cover"
+extension="${cover_url##*.}"
 
-echo "... wget -q \"$cover_url\"" 1>&2
+echo "... wget -q \"$cover_url\" -O \"little prince - $language PP-$lpid.$extension\"" 1>&2
 
-wget -q "$cover_url"
+wget -q -O "little prince - $language PP-$lpid.$extension" "$cover_url"
 

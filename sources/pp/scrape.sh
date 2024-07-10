@@ -57,5 +57,8 @@ extension="${cover_url##*.}"
 
 echo "... wget -q \"$cover_url\" -O \"little prince - $language PP-$lpid.$extension\"" 1>&2
 
-wget -q -O "little prince - $language PP-$lpid.$extension" "$cover_url"
+wget -q "$cover_url" -O "little prince - $language PP-$lpid.$extension"
+
+echo "... touch \"little prince - $language PP-$lpid.$extension\"" 1>&2
+touch "little prince - $language PP-$lpid.$extension"
 

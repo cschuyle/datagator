@@ -4,13 +4,14 @@ set -o pipefail
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 script_file=$(basename "$0")
 
-imagesdir="$1"
-echo "IMAGES DIR $imagesdir" 1>&2
-
 source "$script_dir/../../shared/functions.sh"
 
 is_installed aws
 is_installed magick
+is_installed Text::Autoformat
+
+imagesdir="$1"
+echo "IMAGES DIR $imagesdir" 1>&2
 
 set -o nounset # set -u
 
@@ -22,7 +23,7 @@ destdir="$tmp_dir"
 bucket="little-prince"
 
 set +e
-aws s3 ls
+aws sts get-caller-identity 1>&/dev/null
 if [[ "$?" != "0" ]]; then
   echo "You must have the aws CLI installed, and you must login to AWS or supply AWS env vars (see the envrc_template file)"
   exit 1

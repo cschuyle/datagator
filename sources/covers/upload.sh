@@ -80,12 +80,13 @@ for filename in $imagesdir/*; do
 
   cp "$filename" "$f1500"
 
-  os='other'
-  if [[ "$os" == "macos" ]]; then
+  # os='other'
+  # if [[ "$os" == "macos" ]]; then
     magick convert "$f1500" -thumbnail 200x200 "$f150"
-  else
-    convert "$f1500" -thumbnail 200x200 "$f150"
-  fi
+  # else
+  #   convert "$f1500" -thumbnail 200x200 "$f150"
+  # fi
+
   ## Upload to AWS
   set -x
   aws s3 cp "$f1500" "s3://moocho-test/public/$bucket/images/1500/$canon_filename"

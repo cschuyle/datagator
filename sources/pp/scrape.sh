@@ -25,18 +25,22 @@ echo "... curl -s $url/show_livre.php\?lang\=en\&id\=$lpid > \"$lpid.html\"" 1>&
 curl -s $url/show_livre.php\?lang\=en\&id\=$lpid > $lpid.html
 
 val=$(
-    cat "$lpid.html" | \
-    grep -B 2 -A 2 '<div class="feature">' | \
-    tail -1 | \
-    perl -pe 's/.*&nbsp;//' | \
-    perl -pe 's/<.?[^>+]+>//g' | \
-    perl -pe 's/^\s*//' | \
-    perl -pe 's/\s*$//'
+    cat "$lpid.html" \
+    | grep -B 2 -A 2 '<div class="feature">' \
+    | tail -1 \
+    | perl -pe 's/.*&nbsp;//' \
+    | perl -pe 's/<.?[^>+]+>//g' \
+    | perl -pe 's/^\s*//' \
+    | perl -pe 's/\s*$//' \
+    | perl -pe 's/\s*PP-\d+//g' \
     ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
 
 val=$(
-    cat "$lpid.html" | \
-    grep '<title>' | perl -ne '/\/(.+)\/.*?\d{4}/ and print $1 or die "HORRIBLY";' | perl -pe 's/&nbsp;//g;'
+    cat "$lpid.html" \
+    | grep '<title>' \
+    | perl -ne '/\/(.+)\/.*?\d{4}/ and print $1 or die "HORRIBLY";' \
+    | perl -pe 's/&nbsp;//g;' \
+    | perl -pe 's/\s*PP-\d+//g' \
     ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
 
 

@@ -97,16 +97,44 @@ for filename in $imagesdir/*; do
   set +x
   ## Output JSON snippet
 
-  cat >>"$json_file" <<EOF
-    {
-      "littlePrinceItem": {
-        "title": "$title",
-        "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
-        "language": "$language",
-        "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename"
-      }
-    },
+  lpid="$("${script_dir}/extract-lpid.pl" "${canon_filename}")"
+  extra_metadata_file="${imagesdir}/$lpid.json"
+  echo CHECK FOR $extra_metadata_file
+  if [[ -f "$extra_metadata_file" ]]; then
+    echo "--- Found extra metadata file:"
+    cat "$extra_metadata_file"
+    echo "---"
+
+    cat >>"$json_file" <<EOF
+      {
+        "littlePrinceItem": {
+          "title": "$title",
+          "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
+          "language": "$language",
+          "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename",
 EOF
+
+  cat "$extra_metadata_file" >> "$json_file"
+
+  cat >>"$json_file" <<EOF
+        }
+      },
+EOF
+  
+  else
+  
+    cat >>"$json_file" <<EOF
+      {
+        "littlePrinceItem": {
+          "title": "$title",
+          "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
+          "language": "$language",
+          "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename"
+        }
+      },
+EOF
+
+  fi
 
   echo "... covers upload: Output file: $json_file" 1>&2
 

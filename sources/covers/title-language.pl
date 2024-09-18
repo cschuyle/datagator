@@ -126,6 +126,7 @@ else {
 
 # Scrub out chaff for Little Prince Foundation downloads
 $title =~ s/\s*PP-\d+//g;
+$language =~ s/\s*PP-\d+//g;
 
 print <<"EOF";
 "$title"

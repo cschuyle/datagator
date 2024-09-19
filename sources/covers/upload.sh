@@ -11,7 +11,7 @@ is_installed magick
 is_installed Text::Autoformat
 
 imagesdir="$1"
-echo "IMAGES DIR $imagesdir" 1>&2
+echo "@@@@@ Scanning for cover images: $imagesdir" 1>&2
 
 set -o nounset # set -u
 
@@ -25,7 +25,7 @@ bucket="little-prince"
 set +e
 aws sts get-caller-identity 1>&/dev/null
 if [[ "$?" != "0" ]]; then
-  echo "You must have the aws CLI installed, and you must login to AWS or supply AWS env vars (see the envrc_template file)"
+  echo "Error: You must have the aws CLI installed, and you must login to AWS or supply AWS env vars (see the envrc_template file)"
   exit 1
 fi
 set -e
@@ -43,7 +43,6 @@ for filename in $imagesdir/*; do
   base_filename=$(basename "$filename")
   canon_filename="${base_filename// /-}"
   canon_filename="${base_filename//+/plus}"
-  echo CANONICAL FILENAME $canon_filename
 
   title="$base_filename"
   title="$(basename "$title" .jpeg)"
@@ -53,18 +52,15 @@ for filename in $imagesdir/*; do
   title="$(basename "$title" .webp)"
 
   if [[ "$base_filename" == "$title" ]]; then
-    echo "... covers upload: SKIP NON-IMAGE FILE: $filename" 1>&2
+    echo "@@@@ Skip non-image file [$filename]" 1>&2
     continue
   fi
 
-  echo ... covers upload IMAGE FILE: $filename 1>&2
-  echo ... covers upload RAW TITLE: $title 1>&2
+  echo "@@@@ Processing file [$filename]" 1>&2
 
   export IFS=$'\n'
   title_language=($("$script_dir/title-language.pl" "$title"))
   unset IFS
-
-  echo covers upload: TITLE LANGUAGE "${title_language[@]}" 1>&2
 
   title="${title_language[0]}"
   language="${title_language[1]}"
@@ -72,8 +68,8 @@ for filename in $imagesdir/*; do
   title=$(echo "$title" | tr -d '"')
   language=$(echo "$language" | tr -d '"')
 
-  echo ... covers upload: PROCESSED TITLE $title 1>&2
-  echo ... covers upload: LANGUAGE $language 1>&2
+  echo "@@@ Title: $title" 1>&2
+  echo "@@@ Language: $language" 1>&2
 
   f1500="$destdir/1500/$canon_filename"
   f150="$destdir/150/$canon_filename"
@@ -82,28 +78,36 @@ for filename in $imagesdir/*; do
 
   # os='other'
   # if [[ "$os" == "macos" ]]; then
-    magick convert "$f1500" -thumbnail 200x200 "$f150"
+    magick "$f1500" -thumbnail 200x200 "$f150"
   # else
   #   convert "$f1500" -thumbnail 200x200 "$f150"
   # fi
 
   ## Upload to AWS
-  set -x
-  aws s3 cp "$f1500" "s3://moocho-test/public/$bucket/images/1500/$canon_filename"
+  # set -x
+  echo "@@@ Uploading large image [$canon_filename] to AWS" 1>&2
+  aws s3 cp "$f1500" "s3://moocho-test/public/$bucket/images/1500/$canon_filename" >/dev/null
+
+  echo "@@@ Setting public access to large image" 1>&2
   aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/1500/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers
 
-  aws s3 cp "$f150" "s3://moocho-test/public/$bucket/images/150/$canon_filename"
+
+  echo "@@@ Uploading small image [$canon_filename] to AWS" 1>&2
+  aws s3 cp "$f150" "s3://moocho-test/public/$bucket/images/150/$canon_filename" >/dev/null
+  
+  echo "@@@ Setting public access to large image" 1>&2
   aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/150/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers
-  set +x
+  # set +x
+
   ## Output JSON snippet
 
   lpid="$("${script_dir}/extract-lpid.pl" "${canon_filename}")"
   extra_metadata_file="${imagesdir}/$lpid.json"
-  echo CHECK FOR $extra_metadata_file
+  # echo CHECK FOR $extra_metadata_file
   if [[ -f "$extra_metadata_file" ]]; then
-    echo "--- Found extra metadata file:"
-    cat "$extra_metadata_file"
-    echo "---"
+    echo "@@@ FOUND EXTRA METADATA file for $title - $language: [$extra_metadata_file]" 1>&2
+    cat "$extra_metadata_file" 1>&2
+    echo "---" 1>&2
 
     cat >>"$json_file" <<EOF
       {
@@ -122,7 +126,8 @@ EOF
 EOF
   
   else
-  
+      echo "@@@ NO EXTRA METADATA for $title - $language" 1>&2
+
     cat >>"$json_file" <<EOF
       {
         "littlePrinceItem": {
@@ -136,6 +141,7 @@ EOF
 
   fi
 
-  echo "... covers upload: Output file: $json_file" 1>&2
-
 done
+
+echo "@@@@@ Output file [$json_file]. Copied to clipboard." 1>&2
+cat "$json_file" |pbcopy

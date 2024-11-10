@@ -37,8 +37,14 @@ for i in range(1, len(sys.argv)):
     match = re.search(r"""^PP-(\d+)$""", command)
     if match and match.group(1):
         ppid = match.group(1)
-        print("Command: Get metadata from Little Prince Collection (of Jean-Marc Probst), for PP id " + ppid, file=sys.stderr)
+        print("Command: Get metadata from Little Prince Foundation (of Jean-Marc Probst), for PP id " + ppid, file=sys.stderr)
         process = subprocess.run([f"{sourcepath}/pp/scrape.sh", ppid])
+
+    elif command == 'PP':
+        print("Command: PP (download any Little Prince Foundation data by examining filenames for PP-*)", file=sys.stderr)
+        command = f"{sourcepath}/pp/scrape-from-filenames.sh", *sys.argv[2::len(sys.argv)]
+        process = subprocess.run(command)
+        sys.exit(process.returncode)
 
     elif command == 'covers':
         print("Command: Upload covers", file=sys.stderr)

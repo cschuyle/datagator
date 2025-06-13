@@ -8,7 +8,7 @@ import subprocess
 def exit_usage(command):
     exitcode = -1
     if(command):
-        if(command.lower() == "help"):
+        if(command.lower()[0:1] == "h"):
             exitcode = 0
         else:
             print(f"Unknown command: {command}")
@@ -34,6 +34,10 @@ sourcepath = f"{binpath}/../sources"
 for i in range(1, len(sys.argv)):
     command = sys.argv[i]
     
+    match = re.search(r"""^--?(h(elp)?)""", command)
+    if match:
+        exit_usage(match.group(1))
+
     match = re.search(r"""^PP-(\d+)$""", command)
     if match and match.group(1):
         ppid = match.group(1)
@@ -66,5 +70,11 @@ for i in range(1, len(sys.argv)):
         process = subprocess.run(command)
         sys.exit(process.returncode)
 
+    # TODO Is it OK to default to search? I say yes - at least for now
     else:
-        exit_usage(sys.argv[1])
+        command = f"{sourcepath}/search/search-video.sh", *sys.argv[1::len(sys.argv)]
+        process = subprocess.run(command)
+        sys.exit(process.returncode)
+
+    #else:
+    #    exit_usage(sys.argv[1])

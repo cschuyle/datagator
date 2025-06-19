@@ -52,3 +52,34 @@ lines2json() {
 
     # cat "$output_file"
 }
+
+detect_host_and_sourcedir() {
+    host=unknown
+    platform=unknown
+    [[ "$(hostname)" == "DiskStation" ]] && host=DiskStation
+
+    if [[ "$host" == "DiskStation" ]]; then
+        sourcedir=/volume1/cschuyle
+        find=find
+        platform=DiskStation
+    else
+        (command -v gfind >/dev/null) || (echo "gfind isn't installed, maybe try: brew install findutils" && exit 1)
+        find=gfind
+        sourcedir=/Volumes/cschuyle
+        # Just assuming
+        platform=Mac
+    fi
+
+    echo @@@@ Platform detected: $platform 1>&2
+    if [[ ! -d "$sourcedir" ]]; then
+        echo "My Data source dir '$sourcedir' does not exist." 1>&2
+        if [[ "$platform" == "Mac" ]]; then
+            echo "Maybe try mounting it" 1>&2
+        fi
+        exit 1
+    fi
+
+    mydatadir="$sourcedir"
+}
+
+

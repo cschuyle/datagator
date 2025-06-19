@@ -14,6 +14,7 @@ def exit_usage(command):
             print(f"Unknown command: {command}")
     
     print("""Usage:
+    dg /<term>                          # Search Movies trove for term
     dg PP-1234 ...                      # Download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
     dg covers [DIRECTORY OF IMAGES]     # Upload artifacts (covers) to S3, save the metadata to a file
     dg pdfs [DIRECTORY OF DIRECTORIES]  # Upload PDF file(s) (and optionally a cover image), output metadata to a file
@@ -71,6 +72,8 @@ for i in range(1, len(sys.argv)):
         sys.exit(process.returncode)
 
     # TODO Is it OK to default to search? I say yes - at least for now
+    # TODO Broaden search to other troves
+    # TODO Allow several terms
     else:
         command = f"{sourcepath}/search/search-video.sh", *sys.argv[1::len(sys.argv)]
         process = subprocess.run(command)

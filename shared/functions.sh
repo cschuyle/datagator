@@ -71,13 +71,13 @@ detect_host_and_sourcedir() {
     fi
 
     echo @@@@ Platform detected: $platform 1>&2
-    if [[ ! -d "$sourcedir" ]]; then
-        echo "My Data source dir '$sourcedir' does not exist." 1>&2
-        if [[ "$platform" == "Mac" ]]; then
-            echo "Maybe try mounting it" 1>&2
-        fi
-        exit 1
-    fi
+    # if [[ ! -d "$sourcedir" ]]; then
+    #     echo "My Data source dir '$sourcedir' does not exist." 1>&2
+    #     if [[ "$platform" == "Mac" ]]; then
+    #         echo "Maybe try mounting it" 1>&2
+    #     fi
+    #     exit 1
+    # fi
 
     mydatadir="$sourcedir"
 }

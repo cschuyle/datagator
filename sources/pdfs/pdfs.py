@@ -21,15 +21,19 @@ def uploadToS3(fullFilename, bucketSuffix=None):
     else:
         bucketKey = f'{bucketPrefix}/{cleanedFilename}'
 
+
     subprocess.run(['aws', 's3', 'cp', fullFilename, f's3://{bucket}/{bucketKey}'], check=True)
 
-    subprocess.run([
-        'aws', 's3api', 'put-object-acl',
-        '--bucket', bucket,
-        '--key', bucketKey,
-        '--grant-full-control', 'emailaddress=carl@dragnon.com',
-        '--grant-read', 'uri=http://acs.amazonaws.com/groups/global/AllUsers'
-    ], check=True)
+    try:
+        subprocess.run([
+            'aws', 's3api', 'put-object-acl',
+            '--bucket', bucket,
+            '--key', bucketKey,
+            '--grant-full-control', 'emailaddress=carl@dragnon.com',
+            '--grant-read', 'uri=http://acs.amazonaws.com/groups/global/AllUsers'
+        ], check=True)
+    except:
+        print(f"@@@@ WARNING: Failed to set ACL on s3://{bucket}/{bucketKey}", file=sys.stderr)
 
     return f'https://{bucket}.s3-us-west-2.amazonaws.com/{bucketKey}'
 
@@ -61,12 +65,16 @@ def displayableFileType(filename):
         return 'txt'
     if filename.endswith('.pdf'):
         return 'pdf'
+    if filename.endswith('.rtf'):
+        return 'rtf'
     if filename.endswith('.doc'):
         return 'doc'
     if filename.endswith('.docx'):
         return 'docx'
     if filename.endswith('.mp3'):
         return 'mp3'
+    if filename.endswith('.mp4'):
+        return 'mp4'
     if filename.endswith('.m4v'):
         return 'm4v'
     if filename.endswith('.zip'):

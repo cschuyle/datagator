@@ -89,14 +89,14 @@ for filename in $imagesdir/*; do
   aws s3 cp "$f1500" "s3://moocho-test/public/$bucket/images/1500/$canon_filename" >/dev/null
 
   echo "@@@ Setting public access to large image" 1>&2
-  aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/1500/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers
+  aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/1500/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers || true
 
 
   echo "@@@ Uploading small image [$canon_filename] to AWS" 1>&2
   aws s3 cp "$f150" "s3://moocho-test/public/$bucket/images/150/$canon_filename" >/dev/null
   
   echo "@@@ Setting public access to small image" 1>&2
-  aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/150/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers
+  aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/150/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers || true
   # set +x
 
   ## Output JSON snippet

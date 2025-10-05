@@ -50,5 +50,5 @@ ebooks_file="$moocho_root/troves/synology-ebooks/ebooks.json"
 do-search-on-titles "$ebooks_file"
 
 echo "@@ Books"
-books_file=""$moocho_root/troves/books/books.json"
+books_file="$moocho_root/troves/books/books.json"
 do-search-on-lp-item "$books_file"

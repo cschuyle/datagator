@@ -15,6 +15,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 ## Which websites?
 
 - Amazon Wish Lists
+- Audible
 - Kanopy
 - Kindle
 
@@ -27,7 +28,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 ## Upcoming troves
 
 - 101 Domain
-- Audible
 - BookBuddy
 - Cafe DVD
 - DVD Inbox

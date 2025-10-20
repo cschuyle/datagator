@@ -1,37 +1,42 @@
 # Datagator
 
-Datagator is a lightweight flexible framework to ingest, store, and analyze Data about Data 
+**To Keep Your Data Safe**
 
-## Ingestion
-A collection of scripts to extract, transform, and publish data from a number of websites.
+Datagator is for collecting your data from The Internet. 
 
-## Usage
+It's a collection of scripts to extract and transform data from a number of websites, and make it searchable.
 
-### Setup
-TODO:
-Configure by using `datagator-config-template`,  copy it to `~/.datagator` and fill-in the blanks. Alternatively, set env vars (see `datagator-config-template` file for details).
+## Command line
 
-### Create local data
+The `dg` command searches your "troves" (each source of data is called a trove).
 
-#### Netflix Queue
+There's also a upcoming repo: A web site to navigate your troves. It's yet to be made public.
 
-[Parse the DVD Queue page](./netflix), which you might find useful prior to Netflix DVD ceasing operations on Sept. 28, 2023 
+## Which websites?
 
-#### Little Prince Collection
+- Amazon Wish Lists
 
-2. The Little Prince Collection (https://www.petit-prince-collection.com)
+## Less-Familiar troves:
 
-```console
-dg get PP-7146
-```
-Scrapes Little Prince Collection data from https://www.petit-prince-collection.com/lang/show_livre.php?lang=en&id=7146
+- Your own personal collection of video, music, books, eBooks. etc. (in a directory structure)
+- The Little Prince Foundation - The world's foremost collection of _Le Petit Prince_ editions.
+- Verlag Edition Tintenfaß - publishers of books in multiple languages.
 
-Output:
-- `$DGOUT/PP/$PPID/items.json` JSON array of Datagator-format records including metadata
-- `$DGOUT/PP/$PPID/raw-covers` Downloaded resources (images)
+## Upcoming troves
 
-### Publish local data to an environment
-
-`dg build` Do *some* validation on local data and build the publishable artifacts.
-
-`dg publish` Upload (reconcile) all local data to the cloud deployment.
+- 101 Domain
+- Amazon Kindle
+- Audible
+- BookBuddy
+- Cafe DVD
+- DVD Inbox
+- Goodreads
+- Gumroad
+- IMDB
+- Kanopy
+- Manning
+- Namecheap
+- Netflix
+- Pocket
+- Pragmatic Programmers
+- Spotify

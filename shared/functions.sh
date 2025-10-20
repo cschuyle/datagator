@@ -81,5 +81,3 @@ detect_host_and_sourcedir() {
 
     mydatadir="$sourcedir"
 }
-
-

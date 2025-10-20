@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+set -o errexit # set -e
+set -o pipefail
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_file=$(basename "$0")
+
+echo "CSV --> json, this might take a while"
+${scriptdir}/transform.sh
+
+one_json_file="${scriptdir}/../../tmp/private/amazon-_Unfiled.json"
+cat "${one_json_file}" | jq . >/dev/null

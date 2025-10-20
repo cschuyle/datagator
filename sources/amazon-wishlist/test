@@ -6,8 +6,13 @@ set -o pipefail
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 script_file=$(basename "$0")
 
+trovedir="$scriptdir/output"
+tmpdir="$scriptdir/tmp"
+mkdir -p "$trovedir"
+mkdir -p "$tmpdir"
+
 echo "CSV --> json, this might take a while"
 ${scriptdir}/transform.sh
 
-one_json_file="${scriptdir}/../../tmp/private/amazon-_Unfiled.json"
+one_json_file="${trovedir}/amazon-Test.json"
 cat "${one_json_file}" | jq . >/dev/null

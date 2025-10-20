@@ -16,6 +16,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 
 - Amazon Wish Lists
 - Kanopy
+- Kindle
 
 ## Less-Familiar troves:
 
@@ -26,7 +27,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 ## Upcoming troves
 
 - 101 Domain
-- Amazon Kindle
 - Audible
 - BookBuddy
 - Cafe DVD
@@ -36,7 +36,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - IMDB
 - Manning
 - Namecheap
-- Netflix
-- Pocket
+- Netflix DVD Queue (obsolete)
+- Pocket (obsolete)
 - Pragmatic Programmers
 - Spotify

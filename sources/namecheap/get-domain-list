@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -o errexit # set -e
+set -o pipefail
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$scriptdir/../../shared/functions.sh"
+
+trovedir="$scriptdir/output"
+tmpdir="$scriptdir/tmp"
+mkdir -p "$trovedir"
+mkdir -p "$tmpdir"
+
+cd "$scriptdir"
+
+\rm -f "$tmpdir/namecheap.punycode.txt"
+./fetch-and-transform-all | sort > "$tmpdir/namecheap.punycode.txt"
+
+echoerr "### Converting Punycode to pretty URLs"
+\rm -f "$trovedir/namecheap.txt"
+idn2 -d < "$tmpdir/namecheap.punycode.txt" > "$trovedir/namecheap.txt"

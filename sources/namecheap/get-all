@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -o errexit # set -e
+set -o pipefail
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$scriptdir/../../shared/functions.sh"
+
+trovedir="$scriptdir/output"
+tmpdir="$scriptdir/tmp"
+mkdir -p "$trovedir"
+mkdir -p "$tmpdir"
+
+is_installed xmlstarlet
+
+cd "$scriptdir"
+
+if [[ -z "$NAMECHEAP_APIKEY" ]]; then
+   echoerr "NAMECHEAP_API_KEY not set, trying to use Mac magic to get it out of the keychain"
+   NAMECHEAP_API_KEY=$(security find-generic-password -a ${USER} -s fuzzywuzzy -w)
+fi
+if [[ -z "$NAMECHEAP_API_KEY" ]]; then
+    echoerr "Unable to get NAMECHEAP_API_KEY"
+    exit 1
+fi
+export NAMECHEAP_API_KEY
+
+
+if [[ -z "$NAMECHEAP_CLIENT_IP" ]]; then
+	local_ip=$(ifconfig|grep inet|grep broadcast|cut -d ' ' -f 2)
+	NAMECHEAP_CLIENT_IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+	echoerr '#####' Your local IP is ${local_ip} . Your public IP is ${NAMECHEAP_CLIENT_IP}
+fi
+
+if [[ -z "$NAMECHEAP_CLIENT_IP" ]]; then
+    echoerr "Couldn't get NAMECHEAP_CLIENT_IP. You can try to export it yourself"
+    exit 1
+fi
+export NAMECHEAP_CLIENT_IP
+
+let p=1
+while true; do
+    xml_outfile="$tmpdir/namecheap-page-${p}.xml"
+    ./fetch-namecheap-list $p > "$xml_outfile"
+    echoerr '###' Page ${p}: $(wc -l "$xml_outfile") XML lines
+    #sed -i.bak '/^[[:space:]]*$/d' "$xml_outfile"
+    ./transform-namecheap "$xml_outfile" > "$xml_outfile.txt"
+    [ -s "$xml_outfile.txt" ] || break
+
+    cat "$xml_outfile.txt"
+    let p++
+done
+
+if [[ "$p" -eq 1 ]]; then
+  echoerr "Got no domains. Probably you need to whitelist your public IP in your Namecheap API settings"
+  exit 1
+fi

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -o errexit # set -e
+set -o pipefail
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$scriptdir/../../shared/functions.sh"
+
+file=$1
+
+# Request XmlStarlet: brew install xmlstarlet
+echoerr "### Converting XML $file"
+
+(xmlstarlet sel -T -t -m //_:Domain -s D:N:- true -v "concat(@Expires, ' | ', @AutoRenew, ' | ', @Name)" -n  "$file" || true) \
+| perl -pe 's|(\d\d)/(\d\d)/(\d\d\d\d)|\3-\1-\2|'

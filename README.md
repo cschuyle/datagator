@@ -20,6 +20,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - IMDB
 - Kanopy
 - Kindle
+- Namecheap
 - Spotify
 
 ## Less-Familiar troves:
@@ -36,7 +37,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - DVD Inbox
 - Gumroad
 - Manning
-- Namecheap
 - Netflix DVD Queue (obsolete)
 - Pocket (obsolete)
 - Pragmatic Programmers

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -o errexit # set -e
+set -o pipefail
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$scriptdir/../../shared/functions.sh"
+
+trovedir="$scriptdir/output"
+tmpdir="$scriptdir/tmp"
+mkdir -p "$trovedir"
+mkdir -p "$tmpdir"
+
+cd "$scriptdir"
+
+page=$1
+
+set -e
+
+if [[ -z "$NAMECHEAP_API_KEY" ]]; then
+    echoerr "NAMECHEAP_API_KEY must be set"
+    exit 1
+fi 
+
+curl -s "https://api.namecheap.com/xml.response?ApiUser=cschuyle&ApiKey=${NAMECHEAP_API_KEY}&UserName=cschuyle&PageSize=100&Page=${page}&Command=namecheap.domains.getList&ClientIp=${NAMECHEAP_CLIENT_IP}"

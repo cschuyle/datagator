@@ -1,0 +1,5 @@
+if [[ "$1" == "" ]]; then
+	echo "Usage: $0 <apikey>"
+	exit 1
+fi
+security add-generic-password -a $USER -s fuzzywuzzy -w $1 

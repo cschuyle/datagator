@@ -1,3 +1,5 @@
+echoerr() { printf "%s\n" "$*" >&2; }
+
 is_installed() {
     required_command="$1"
 

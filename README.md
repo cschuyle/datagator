@@ -15,6 +15,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 ## Which websites?
 
 - Amazon Wish Lists
+- Kanopy
 
 ## Less-Familiar troves:
 
@@ -33,7 +34,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - Goodreads
 - Gumroad
 - IMDB
-- Kanopy
 - Manning
 - Namecheap
 - Netflix

@@ -20,6 +20,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - IMDB
 - Kanopy
 - Kindle
+- Spotify
 
 ## Less-Familiar troves:
 
@@ -39,4 +40,4 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - Netflix DVD Queue (obsolete)
 - Pocket (obsolete)
 - Pragmatic Programmers
-- Spotify
+

@@ -16,6 +16,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 
 - Amazon Wish Lists
 - Audible
+- IMDB
 - Kanopy
 - Kindle
 
@@ -33,7 +34,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - DVD Inbox
 - Goodreads
 - Gumroad
-- IMDB
 - Manning
 - Namecheap
 - Netflix DVD Queue (obsolete)

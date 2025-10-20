@@ -16,6 +16,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 
 - Amazon Wish Lists
 - Audible
+- BookBuddy
 - Goodreads
 - IMDB
 - Kanopy
@@ -32,7 +33,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 ## Upcoming troves
 
 - 101 Domain
-- BookBuddy
 - Cafe DVD
 - DVD Inbox
 - Gumroad

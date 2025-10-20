@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -o errexit # set -e
+set -o nounset # set -u
+set -o pipefail
+## Boilerplate
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # where does this script live
+rootdir="$scriptdir/../.." # repo root
+source "$rootdir/shared/functions.sh" # shared functions
+
+trovedir="$scriptdir/output"
+tmpdir="$scriptdir/tmp"
+mkdir -p "$trovedir"
+mkdir -p "$tmpdir"
+
+mkdir -p "$trovedir"
+rm -f "$tmpdir"/*.json
+
+list_id="kindle"
+
+output_file="$trovedir/$list_id.json"
+
+cd "${scriptdir}"
+./transform.sh > /dev/null 2>&1
+cat "${output_file}" | jq . >/dev/null

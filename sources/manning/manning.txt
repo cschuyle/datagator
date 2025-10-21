@@ -1,0 +1,771 @@
+
+
+Interview Speak 
+Barbara Limmer, Laura Browne
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Python Workout, Second Edition  
+Reuven M Lerner
+version: 4, last updated: 2025-09-29
+  
+liveBook  pdf  epub  kindle
+
+Python Workout  
+Reuven M. Lerner
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Investing for Programmers 
+Stefan Papp
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Terraform in Action 
+Scott Winkler
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Spring AI in Action  
+Craig Walls
+version: 5, last updated: 2025-09-30
+ 
+liveBook  pdf  epub  kindle
+
+Think Distributed Systems 
+Dominik Tornow
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Modern Java in Action 
+Raoul-Gabriel Urma, Mario Fusco, Alan Mycroft
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Java 8 in Action  
+Raoul-Gabriel Urma, Mario Fusco, and Alan Mycroft
+  
+liveBook  pdf  epub  kindle
+
+Essential GraphRAG 
+Tomaž Bratanič and Oskar Hane
+Foreword by Paco Nathan
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Build a Machine Learning Platform (From Scratch)  
+Benjamin Tan Wei Hao, Shanoop Padmanabhan, and Varun Mallya
+version: 5, last updated: 2025-01-13
+  
+liveBook  pdf  epub  kindle
+
+How Large Language Models Work 
+Edward Raff, Drew Farris and Stella Biderman for Booz Allen Hamilton
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Exploring Kotlin Functional Programming 
+With chapters selected by John Guthrie
+
+liveBook  pdf
+
+A Damn Fine Stable Diffusion Book  
+Will Kurt
+version: 7, last updated: 2025-10-16
+ 
+liveBook  pdf  epub  kindle
+
+Everyday Data Visualization 
+Desireé Abbott
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Full Stack GraphQL Applications 
+William Lyon
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Acing the System Design Interview 
+Zhiyong Tan
+Foreword by Anthony Asta, Michael D. Elder
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Machine Learning for Drug Discovery  
+Noah Flynn
+version: 8, last updated: 2025-08-25
+  
+liveBook  pdf  epub
+
+Snowflake Data Engineering 
+Maja Ferle
+Foreword by Joe Reis
+  
+buy liveAudio  liveBook  pdf  epub
+
+Automate Everyday Work Tasks with ChatGPT  
+Natassha Selvaraj
+version: 6, last updated: 2024-08-09
+canceled: request exchange or refund
+ 
+liveBook  pdf  epub
+
+The Well-Grounded Data Analyst 
+David Asboth
+Foreword by Reuven M. Lerner
+  
+buy liveAudio  liveBook  pdf  epub
+
+LLMs in Production 
+Christopher Brousseau and Matthew Sharp
+Foreword by Joe Reis
+  
+buy liveAudio  liveBook  pdf  epub
+
+Exploring Natural Language Processing 
+With chapters selected by Hobson Lane
+liveBook  pdf
+
+Essential TypeScript 5, Third Edition 
+Adam Freeman
+  
+buy liveAudio  liveBook  pdf  epub
+
+Spring Microservices in Action, Second Edition 
+John Carnell, Illary Huaylupo Sánchez
+  
+buy liveAudio  liveBook  pdf  epub
+
+Spring Microservices in Action  
+John Carnell
+ 
+liveBook  pdf  epub
+
+Svelte and Sapper in Action 
+Mark Volkmann
+  
+buy liveAudio  liveBook  pdf  epub
+
+The Jamstack Book 
+Raymond Camden and Brian Rinaldi
+Foreword by Mathias Biilmann Christensen
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Julia as a Second Language 
+Erik Engheim
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Hugo in Action 
+Atishay Jain
+Foreword by Steve Francia
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Kubernetes in Action, Second Edition  
+Marko Lukša, Kevin Conner
+version: 17, last updated: 2025-09-25
+  
+liveBook  pdf  epub  kindle
+
+Cloud Native Spring in Action 
+Thomas Vitale
+Foreword by Josh Long
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Spring Security in Action 
+Laurentiu Spilca
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+The Well-Grounded Java Developer, Second Edition 
+Benjamin Evans, Jason Clark, and Martijn Verburg
+Foreword by Heinz Kabutz
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+The Well-Grounded Java Developer  
+Benjamin J. Evans and Martijn Verburg
+Foreword by Dr. Heinz Kabutz
+ 
+liveBook  pdf  epub  kindle
+
+Good Code, Bad Code 
+Tom Long
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Java Persistence with Spring Data and Hibernate 
+Cătălin Tudose
+Forewords by Dmitry Aleksandrov and Mohamed Taman
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Java Persistence with Hibernate, Second Edition  
+Christian Bauer, Gavin King, and Gary Gregory
+liveBook  pdf  epub  kindle
+
+AWS Fargate: Deploy a Fargate Cluster 
+Chadchapol Vittavutkarnvej
+open in liveProject
+
+Isomorphic Web Applications 
+Elyse Kolker Gordon
+  
+liveBook  pdf  epub  kindle
+
+Visualizing Graph Data 
+Corey L. Lanum
+ 
+liveBook  pdf  epub  kindle
+
+Spring in Action, Sixth Edition 
+Craig Walls
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Spring in Action, Fifth Edition  
+Craig Walls
+ 
+liveBook  pdf  epub  kindle
+
+Elasticsearch in Action, Second Edition 
+Madhusudhan Konda
+Foreword by Shay Banon
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Elasticsearch in Action  
+Radu Gheorghe, Matthew Lee Hinman, and Roy Russo
+ 
+liveBook  pdf  epub  kindle
+
+Knowledge Graphs and LLMs in Action 
+Alessandro Negro with Vlastimil Kus, Giuseppe Futia and Fabio Montagna
+Forewords by Maxime Labonne, Khalifeh AlJadda
+  
+liveBook  pdf  epub  kindle
+
+Design for Developers 
+Stephanie Stimac
+Foreword by Aaron Gustafson
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Street Coder 
+Sedat Kapanoglu
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Machine Learning Engineering in Action 
+Ben Wilson
+  
+liveBook  pdf  epub  kindle
+
+Julia for Data Analysis 
+Bogumił Kamiński
+Foreword by Viral Shah
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Feature Engineering Bookcamp 
+Sinan Ozdemir
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Effective Data Science Infrastructure 
+Ville Tuulos
+Foreword by Travis Oliphant
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+D3.js in Action, Third Edition 
+Elijah Meeks, Anne-Marie Dufour
+Foreword by Andy Kirk
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+D3.js in Action, Second Edition  
+Elijah Meeks
+ 
+liveBook  pdf  epub  kindle
+
+Data-Oriented Programming 
+Yehonathan Sharvit
+Forewords by Michael T. Nygard and Ryan Singer
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Evolutionary Deep Learning 
+Micheal Lanham
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Software Security for Developers  
+Adib Saikali, Laurențiu Spilcă
+version: 7, last updated: 2025-10-16
+  
+liveBook  pdf  epub  kindle
+
+Algorithms and Data Structures for Massive Datasets 
+Dzejla Medjedovic, Emin Tahirovic, and Ines Dedovic
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+The Mikado Method 
+Ola Ellnestam and Daniel Brolund
+Foreword by Tom Poppendieck
+ 
+liveBook  pdf  epub  kindle
+
+Natural Language Processing in Action, Second Edition 
+Hobson Lane and Maria Dyshel
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Grokking Machine Learning 
+Luis G. Serrano
+Foreword by Sebastian Thrun
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Grokking Deep Learning 
+Andrew W. Trask
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+The Programmer's Brain 
+Felienne Hermans
+Foreword by Jon Skeet
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Rust Servers, Services, and Apps 
+Prabhu Eshwarla
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Swift in Depth 
+Tjeerd in 't Veen
+  
+liveBook  pdf  epub  kindle
+
+iOS Development with Swift in Motion 
+Craig Grummitt
+ 
+resume  view  zip
+
+Transfer Learning for Natural Language Processing 
+Paul Azunre
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Math and Architectures of Deep Learning 
+Krishnendu Chaudhury
+with Ananya H. Ashok, Sujay Narumanchi, Devashish Shankar
+Foreword by Prith Banerjee
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Pandas in Action 
+Boris Paskhaver
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Deep Learning with Structured Data 
+Mark Ryan
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Modern C 
+Jens Gustedt
+  
+liveBook  pdf  epub  kindle
+
+iOS Development with Swift 
+Craig Grummitt
+ 
+liveBook  pdf  epub  kindle
+
+Parallel and High Performance Computing 
+Robert Robey and Yuliana Zamora
+  
+liveBook  pdf  epub  kindle
+
+Grokking Artificial Intelligence Algorithms 
+Rishal Hurbans
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Exploring Modern Web Development 
+With chapters selected by Yakov Fain and Anton Moiseev
+
+liveBook  pdf
+
+Core Kubernetes 
+Jay Vyas and Chris Love
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Advanced Algorithms and Data Structures 
+Marcello La Rocca
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+AI-Powered Search 
+Trey Grainger, Doug Turnbull, Max Irwin
+Foreword by Grant Ingersoll
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Real-World Natural Language Processing 
+Masato Hagiwara
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Nim in Action 
+Dominik Picheta
+ 
+liveBook  pdf  epub  kindle
+
+Human-in-the-Loop Machine Learning 
+Robert (Munro) Monarch
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Grokking Simplicity 
+Eric Normand
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Machine Learning for Mere Mortals 
+Nicholas Chase
+ 
+resume  view  zip
+
+Kubernetes in Action 
+Marko Lukša
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Docker in Practice 
+Ian Miell and Aidan Hobson Sayers
+Foreword by Ben Firshman
+ 
+liveBook  pdf  epub  kindle
+
+Cloud Native Patterns 
+Cornelia Davis
+Foreword by Gene Kim
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Functional Programming in Kotlin 
+Marco Vermeulen, Rúnar Bjarnason, and Paul Chiusano
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Micro Frontends in Action 
+Michael Geers
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Web Design Playground 
+Paul McFedries
+ 
+liveBook  pdf  epub  kindle
+
+Seriously Good Software 
+Marco Faella
+Foreword by Cay Horstmann
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Real-World Cryptography 
+David Wong
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Quantum Computing in Action 
+Johan Vos
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Programming with Types 
+Vlad Riscutia
+  
+liveBook  pdf  epub  kindle
+
+Natural Language Processing for Hackers
+George-Bogdan Ivanov
+pdf  epub  kindle
+
+Math for Programmers 
+Paul Orland
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Learn Quantum Computing with Python and Q# 
+Sarah C. Kaiser and Cassandra E. Granade
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+API Security in Action 
+Neil Madden
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Relevant Search 
+Doug Turnbull and John Berryman
+Foreword by Trey Grainger
+liveBook  pdf  epub  kindle
+
+POJOs in Action
+Chris Richardson
+ 
+pdf
+
+Mastering Large Datasets with Python 
+John T. Wolohan
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Graph-Powered Machine Learning 
+Alessandro Negro
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Graph Databases in Action 
+Dave Bechberger, Josh Perryman
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+GANs in Action 
+Jakub Langr and Vladimir Bok
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Deep Learning for Natural Language Processing 
+Stephan Raaijmakers
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Deep Learning and the Game of Go 
+Max Pumperla and Kevin Ferguson
+Foreword by Thore Graepel
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+The Joy of Kotlin 
+Pierre-Yves Saumont
+  
+liveBook  pdf  epub  kindle
+
+Rust in Action 
+Tim McNamara
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Natural Language Processing in Action 
+Hobson Lane, Cole Howard, Hannes Hapke
+Foreword by Dr. Arwen Griffioen
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Istio in Action 
+Christian E. Posta and Rinor Maloku
+Foreword by Eric Brewer
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Haskell in Depth 
+Vitaly Bragilevsky
+Foreword by Simon Peyton Jones
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Elm in Action 
+Richard Feldman
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Deep Learning for Search 
+Tommaso Teofili
+Foreword by Chris Mattmann
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+R in Action  
+Robert I. Kabacoff
+ 
+liveBook  pdf  epub  kindle
+
+Unity in Action 
+Joseph Hocking
+Foreword by Jesse Schell
+ 
+liveBook  pdf  epub  kindle
+
+R in Action, Second Edition 
+Robert I. Kabacoff
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Scalatra in Action 
+Dave Hrycyszyn, Stefan Ollinger, and Ross A. Baker
+ 
+liveBook  pdf  epub  kindle
+
+Linked Data 
+David Wood, Marsha Zaidman, Luke Ruth, and Michael Hausenblas
+Foreword by Tim Berners-Lee
+ 
+liveBook  pdf  epub  kindle
+
+Functional Reactive Programming 
+Stephen Blackheath and Anthony Jones
+Foreword by Heinrich Apfelmus
+liveBook  pdf  epub  kindle
+
+Practical Recommender Systems 
+Kim Falk
+  
+liveBook  pdf  epub  kindle
+
+Functional Programming in Scala 
+Paul Chiusano and Runar Bjarnason
+Foreword by Martin Odersky
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Event Streams in Action 
+Alexander Dean, Valentin Crettaz
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Grokking Algorithms 
+Aditya Y. Bhargava
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Grokking Functional Programming 
+Michał Płachta
+  
+liveBook  pdf  epub  kindle
+
+Practical Probabilistic Programming 
+Avi Pfeffer
+Foreword by Stuart Russell
+ 
+liveBook  pdf  epub  kindle
+
+D3.js in Action 
+Elijah Meeks
+ 
+liveBook  pdf  epub  kindle
+
+Reactive Design Patterns 
+Roland Kuhn with Brian Hanafee and Jamie Allen
+Foreword by Jonas Bonér
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Real-World Machine Learning 
+Henrik Brink, Joseph W. Richards, and Mark Fetherolf
+Foreword by Beau Cronin
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Using the TI-83 Plus/TI-84 Plus 
+Christopher R. Mitchell
+ 
+liveBook  pdf  epub  kindle
+
+Hello! iOS Development 
+Lou Franco and Eitan Mendelowitz
+ 
+liveBook  pdf  epub  kindle
+
+Making Sense of NoSQL 
+Daniel G. McCreary and Ann M. Kelly
+Foreword by Tony Shaw
+liveBook  pdf  epub  kindle
+
+The Joy of Clojure, Second Edition 
+Michael Fogus and Chris Houser
+Foreword by William E. Byrd and Daniel P. Friedman
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+The Joy of Clojure 
+Michael Fogus and Chris Houser
+ 
+liveBook  pdf  epub  kindle
+
+Practical Data Science with R 
+Nina Zumel and John Mount
+Foreword by Jim Porzak
+liveBook  pdf  epub  kindle
+
+SonarQube in Action 
+G. Ann Campbell and Patroklos P. Papapetrou
+Foreword by Olivier Gaudin
+ 
+liveBook  pdf  epub  kindle
+
+iOS in Practice 
+Bear P. Cahill
+ 
+liveBook  pdf  epub  kindle
+
+Taming Text 
+Grant S. Ingersoll, Thomas S. Morton, and Andrew L. Farris
+Foreword by Liz Liddy
+ 
+liveBook  pdf  epub  kindle
+
+Big Data 
+Nathan Marz and James Warren
+  
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Machine Learning in Action 
+Peter Harrington
+  
+liveBook  pdf  epub  kindle
+
+Hibernate Search in Action 
+Emmanuel Bernard and John Griffin
+ 
+liveBook  pdf  epub  kindle
+
+iPhone and iPad in Action 
+Brandon Trebitowski, Christopher Allen, and Shannon Appelcline
+ 
+liveBook  pdf  epub  kindle
+
+Generative Art 
+Matt Pearson
+Foreword by Marius Watz
+ 
+liveBook  pdf  epub  kindle
+
+F# in Action 
+Amanda Laucher
+version: 1, last updated: 2015-05-06
+canceled: request exchange or refund
+pdf  epub  kindle
+
+Single Page Web Applications 
+Michael S. Mikowski and Josh C. Powell
+Foreword by Gregory D. Benson
+ 
+buy liveAudio  liveBook  pdf  epub  kindle
+
+Scala in Depth 
+Joshua D. Suereth
+Foreword by Martin Odersky
+ 
+liveBook  pdf  epub  kindle

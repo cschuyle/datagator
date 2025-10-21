@@ -21,6 +21,7 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - IMDB
 - Kanopy
 - Kindle
+- Manning
 - Namecheap
 - Spotify
 
@@ -36,7 +37,6 @@ There's also a upcoming repo: A web site to navigate your troves. It's yet to be
 - Cafe DVD
 - DVD Inbox
 - Gumroad
-- Manning
 - Netflix DVD Queue (obsolete)
 - Pocket (obsolete)
 - Pragmatic Programmers

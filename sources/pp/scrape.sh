@@ -24,26 +24,29 @@ url="https://www.petit-prince-collection.com/lang"
 echo "... curl -s $url/show_livre.php\?lang\=en\&id\=$lpid > \"$lpid.html\"" 1>&2
 curl -s $url/show_livre.php\?lang\=en\&id\=$lpid > $lpid.html
 
-val=$(
-    cat "$lpid.html" \
-    | grep -B 2 -A 2 '<div class="feature">' \
-    | tail -1 \
-    | perl -pe 's/.*&nbsp;//' \
-    | perl -pe 's/<.?[^>+]+>//g' \
-    | perl -pe 's/^\s*//' \
-    | perl -pe 's/\s*$//' \
-    | perl -pe 's/\s*PP-\d+//g' \
-    ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
+# val=$(
+#     cat "$lpid.html" \
+#     | grep -B 2 -A 2 '<div class="feature">' \
+#     | tail -1 \
+#     | perl -pe 's/.*&nbsp;//' \
+#     | perl -pe 's/<.?[^>+]+>//g' \
+#     | perl -pe 's/^\s*//' \
+#     | perl -pe 's/\s*$//' \
+#     | perl -pe 's/\s*PP-\d+//g' \
+#     ) && if [[ ! -z "$val" ]]; then echo "  \"language1\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
 
 val=$(
     cat "$lpid.html" \
     | grep '<title>' \
     | perl -ne '/\/(.+)\/.*?\d{4}/ and print $1 or die "HORRIBLY";' \
-    | perl -pe 's/&nbsp;//g;' \
+    | perl -pe 's/&nbsp;/ /g;' \
+    | perl -pe 's/^ //;' \
+    | perl -pe 's/ $//;' \
     | perl -pe 's/\s*PP-\d+//g' \
-    ) && if [[ ! -z "$val" ]]; then echo "  \"language\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
+    ) && if [[ ! -z "$val" ]]; then echo "  \"language2\": \"$val\"," >> "PP-$lpid.json"; language=$val; fi
 
 
+val=$(cat $lpid.html|grep -B 2 -A 2 '>Title:<'|tail -2|perl -pe 's/<[^>+]+>//g' | perl -pe 's/^\s*//' | perl -pe 's/\s*$//') && echo "  \"title\": \"$val\"," >> "PP-$lpid.json"
 val=$(cat $lpid.html|grep -B 2 -A 2 '>Translator(s):<'|tail -1|perl -pe 's/<[^>+]+>//g' | perl -pe 's/^\s*//' | perl -pe 's/\s*$//') && echo "  \"translator\": \"$val\"," >> "PP-$lpid.json"
 val=$(cat $lpid.html|grep -B 2 -A 2 '>Year of publication:<'|tail -1|perl -pe 's/<[^>+]+>//g' | perl -pe 's/^\s*//' | perl -pe 's/\s*$//') && echo "  \"year\": \"$val\"," >> "PP-$lpid.json"
 val=$(cat $lpid.html|grep -B 2 -A 2 '>Place of publication:<'|tail -1|perl -pe 's/<[^>+]+>//g' | perl -pe 's/^\s*//' | perl -pe 's/\s*$//') && echo "  \"publication-location\": \"$val\"," >> "PP-$lpid.json"

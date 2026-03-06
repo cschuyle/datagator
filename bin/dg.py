@@ -15,6 +15,7 @@ def exit_usage(command):
     
     print("""Usage:
     dg /<term>                          # Search Movies trove for term
+    dg tt0078748 ...                    # Look up IMDB title(s) by ID
     dg PP-1234 ...                      # Download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
     dg covers [DIRECTORY OF IMAGES]     # Upload artifacts (covers) to S3, save the metadata to a file
     dg pdfs [DIRECTORY OF DIRECTORIES]  # Upload PDF file(s) (and optionally a cover image), output metadata to a file
@@ -39,8 +40,13 @@ for i in range(1, len(sys.argv)):
     if match:
         exit_usage(match.group(1))
 
-    match = re.search(r"""^PP-(\d+)$""", command)
-    if match and match.group(1):
+    match = re.search(r"""^tt\d+$""", command, re.IGNORECASE)
+    if match:
+        print(f"Command: Get IMDB title info for {command}", file=sys.stderr)
+        process = subprocess.run([f"{sourcepath}/imdb/get-title-info", command])
+
+    elif re.search(r"""^PP-(\d+)$""", command):
+        match = re.search(r"""^PP-(\d+)$""", command)
         ppid = match.group(1)
         print("Command: Get metadata from Little Prince Foundation (of Jean-Marc Probst), for PP id " + ppid, file=sys.stderr)
         process = subprocess.run([f"{sourcepath}/pp/scrape.sh", ppid])

@@ -22,7 +22,12 @@ def uploadToS3(fullFilename, bucketSuffix=None):
         bucketKey = f'{bucketPrefix}/{cleanedFilename}'
 
 
-    subprocess.run(['aws', 's3', 'cp', fullFilename, f's3://{bucket}/{bucketKey}'], check=True)
+    content_type_args = []
+    if fullFilename.lower().endswith('.txt'):
+        content_type_args = ['--content-type', 'text/plain; charset=utf-8']
+        print("TEXT file; assuming UTF-8 encoding.")
+    
+    subprocess.run(['aws', 's3', 'cp', fullFilename, f's3://{bucket}/{bucketKey}'] + content_type_args, check=True)
 
     try:
         subprocess.run([

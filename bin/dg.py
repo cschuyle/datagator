@@ -84,7 +84,13 @@ for i in range(1, len(sys.argv)):
     else:
         search_terms = sys.argv[1:]
         if shutil.which("morsor-cli"):
-            process = subprocess.run(["morsor-cli", *search_terms])
+            proc = subprocess.Popen(["morsor-cli", *search_terms], stderr=subprocess.PIPE)
+            for raw in proc.stderr:
+                line = raw.decode("utf-8", errors="replace")
+                if not re.search(r"HTTP \d+", line):
+                    sys.stderr.write(line)
+            proc.wait()
+            process = proc
         else:
             print("morsor-cli not found in PATH, falling back to grep-based search", file=sys.stderr)
             command = f"{sourcepath}/search/search-video.sh", *sys.argv[1::len(sys.argv)]

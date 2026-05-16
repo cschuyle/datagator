@@ -2,6 +2,7 @@
 
 import sys, os, os.path
 import re
+import shutil
 import subprocess
 
 
@@ -81,8 +82,13 @@ for i in range(1, len(sys.argv)):
     # TODO Broaden search to other troves
     # TODO Allow several terms
     else:
-        command = f"{sourcepath}/search/search-video.sh", *sys.argv[1::len(sys.argv)]
-        process = subprocess.run(command)
+        search_terms = sys.argv[1:]
+        if shutil.which("morsor-cli"):
+            process = subprocess.run(["morsor-cli", *search_terms])
+        else:
+            print("morsor-cli not found in PATH, falling back to grep-based search", file=sys.stderr)
+            command = f"{sourcepath}/search/search-video.sh", *sys.argv[1::len(sys.argv)]
+            process = subprocess.run(command)
         sys.exit(process.returncode)
 
     #else:

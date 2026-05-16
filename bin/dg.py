@@ -16,7 +16,7 @@ def exit_usage(command):
     
     print("""Usage:
     dg /<term>                          # Search Movies trove for term
-    dg tt0078748 ...                    # Look up IMDB title(s) by ID
+    dg tt0078748 ...                    # Look up IMDB title(s) by ID or full URL
     dg PP-1234 ...                      # Download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
     dg covers [DIRECTORY OF IMAGES]     # Upload artifacts (covers) to S3, save the metadata to a file
     dg pdfs [DIRECTORY OF DIRECTORIES]  # Upload PDF file(s) (and optionally a cover image), output metadata to a file
@@ -26,7 +26,9 @@ def exit_usage(command):
 
 
 if len(sys.argv) < 2:
-    exit_usage(None)
+    params = [line.rstrip("\n") for line in sys.stdin if line.strip()]
+else:
+    params = sys.argv[1:]
 
 binpath = repr(os.path.dirname(os.path.realpath(sys.argv[0])))
 binpath = binpath.strip('"\'')
@@ -34,17 +36,19 @@ sourcepath = f"{binpath}/../sources"
 
 # print("SOURCEPATH " + sourcepath)
 
-for i in range(1, len(sys.argv)):
-    command = sys.argv[i]
+for command in params:
     
     match = re.search(r"""^--?(h(elp)?)""", command)
     if match:
         exit_usage(match.group(1))
 
-    match = re.search(r"""^tt\d+$""", command, re.IGNORECASE)
+    match = re.search(r"""(tt\d+)""", command, re.IGNORECASE) \
+        if re.search(r"""^(tt\d+$|https?://[^/]*imdb\.com/)""", command, re.IGNORECASE) \
+        else None
     if match:
-        print(f"Command: Get IMDB title info for {command}", file=sys.stderr)
-        process = subprocess.run([f"{sourcepath}/imdb/get-title-info", command])
+        imdb_id = match.group(1)
+        print(f"Command: Get IMDB title info for {imdb_id}", file=sys.stderr)
+        process = subprocess.run([f"{sourcepath}/imdb/get-title-info", imdb_id])
 
     elif re.search(r"""^PP-(\d+)$""", command):
         match = re.search(r"""^PP-(\d+)$""", command)
@@ -82,7 +86,7 @@ for i in range(1, len(sys.argv)):
     # TODO Broaden search to other troves
     # TODO Allow several terms
     else:
-        search_terms = sys.argv[1:]
+        search_terms = [command]
         if shutil.which("morsor-cli"):
             proc = subprocess.Popen(["morsor-cli", *search_terms], stderr=subprocess.PIPE)
             for raw in proc.stderr:
@@ -93,7 +97,7 @@ for i in range(1, len(sys.argv)):
             process = proc
         else:
             print("morsor-cli not found in PATH, falling back to grep-based search", file=sys.stderr)
-            command = f"{sourcepath}/search/search-video.sh", *sys.argv[1::len(sys.argv)]
+            command = f"{sourcepath}/search/search-video.sh", command
             process = subprocess.run(command)
         sys.exit(process.returncode)
 

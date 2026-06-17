@@ -18,7 +18,7 @@ def exit_usage(command):
     dg /<term>                          # Search Movies trove for term
     dg tt0078748 ...                    # Look up IMDB title(s) by ID or full URL
     dg PP-1234 ...                      # Download metadata and cover image from Le Petit Prince Collection (Jean-Marc Probst) with ID 1234
-    dg covers [DIRECTORY OF IMAGES]     # Upload artifacts (covers) to S3, save the metadata to a file
+    dg covers [-f|--force] [DIRECTORY OF IMAGES]  # Upload artifacts (covers) to S3, save the metadata to a file (-f re-uploads existing images)
     dg pdfs [DIRECTORY OF DIRECTORIES]  # Upload PDF file(s) (and optionally a cover image), output metadata to a file
     dg tintenfass                       # Get Little Prince titles from Verlag Editorial Tintenfaß
 """, file=sys.stderr)
@@ -64,7 +64,7 @@ for command in params:
 
     elif command == 'covers':
         print("Command: Upload covers", file=sys.stderr)
-        command = f"{sourcepath}/covers/upload.sh", *sys.argv[2::len(sys.argv)]
+        command = f"{sourcepath}/covers/upload.sh", *sys.argv[2:]
         process = subprocess.run(command)
         sys.exit(process.returncode)
 

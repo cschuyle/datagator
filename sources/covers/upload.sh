@@ -10,8 +10,24 @@ is_installed aws
 is_installed magick
 is_installed Text::Autoformat
 
-imagesdir="$1"
+force=0
+imagesdir=""
+for arg in "$@"; do
+  case "$arg" in
+    -f|--force) force=1 ;;
+    *) imagesdir="$arg" ;;
+  esac
+done
+
+if [[ -z "$imagesdir" ]]; then
+  echo "USAGE: $script_file [-f|--force] [DIRECTORY OF IMAGES]" 1>&2
+  exit 1
+fi
+
 echo "@@@@@ Scanning for cover images: $imagesdir" 1>&2
+if [[ "$force" -eq 1 ]]; then
+  echo "@@@@@ Force mode: will upload images even if they already exist" 1>&2
+fi
 
 set -o nounset # set -u
 
@@ -35,6 +51,8 @@ cp /dev/null "$json_file"
 
 mkdir -p "$destdir"/1500
 mkdir -p "$destdir"/150
+
+uploaded_count=0
 
 for filename in $imagesdir/*; do
 
@@ -85,23 +103,34 @@ for filename in $imagesdir/*; do
 
   ## Upload to AWS
   # set -x
-  echo "@@@ Uploading large image [$canon_filename] to AWS" 1>&2
-  aws s3 cp "$f1500" "s3://moocho-test/public/$bucket/images/1500/$canon_filename" >/dev/null
+  large_key="public/$bucket/images/1500/$canon_filename"
+  if [[ "$force" -eq 0 ]] && aws s3api head-object --bucket moocho-test --key "$large_key" >/dev/null 2>&1; then
+    echo "@@@ WARNING: large image already exists, skipping upload (use -f to force) [$large_key]" 1>&2
+  else
+    echo "@@@ Uploading large image [$canon_filename] to AWS (public-read)" 1>&2
+    aws s3 cp "$f1500" "s3://moocho-test/$large_key" --acl public-read >/dev/null
+    uploaded_count=$((uploaded_count + 1))
+  fi
 
-  echo "@@@ Setting public access to large image" 1>&2
-  aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/1500/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers || true
-
-
-  echo "@@@ Uploading small image [$canon_filename] to AWS" 1>&2
-  aws s3 cp "$f150" "s3://moocho-test/public/$bucket/images/150/$canon_filename" >/dev/null
-  
-  echo "@@@ Setting public access to small image" 1>&2
-  aws s3api put-object-acl --bucket moocho-test --key "public/$bucket/images/150/$canon_filename" --grant-full-control emailaddress=carl@dragnon.com --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers || true
+  small_key="public/$bucket/images/150/$canon_filename"
+  if [[ "$force" -eq 0 ]] && aws s3api head-object --bucket moocho-test --key "$small_key" >/dev/null 2>&1; then
+    echo "@@@ WARNING: small image already exists, skipping upload (use -f to force) [$small_key]" 1>&2
+  else
+    echo "@@@ Uploading small image [$canon_filename] to AWS (public-read)" 1>&2
+    aws s3 cp "$f150" "s3://moocho-test/$small_key" --acl public-read >/dev/null
+    uploaded_count=$((uploaded_count + 1))
+  fi
   # set +x
 
   ## Output JSON snippet
 
   lpid="$("${script_dir}/extract-lpid.pl" "${canon_filename}")"
+  tintenfass_id="$("${script_dir}/extract-tintenfass-id.pl" "${canon_filename}")"
+  if [[ -n "$tintenfass_id" ]]; then
+    tintenfass_line="          \"tintenfassId\": \"$tintenfass_id\","
+  else
+    tintenfass_line=""
+  fi
   extra_metadata_file="${imagesdir}/$lpid.json"
   # echo CHECK FOR $extra_metadata_file
   if [[ -f "$extra_metadata_file" ]]; then
@@ -115,10 +144,19 @@ for filename in $imagesdir/*; do
           "title": "$title",
           "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
           "language": "$language",
+$tintenfass_line
           "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename",
 EOF
 
-  cat "$extra_metadata_file" >> "$json_file"
+  # Omit language2 if it duplicates the already-emitted language.
+  # Re-indent appended metadata to 10 spaces so it lines up with the sibling fields.
+  language2=$(perl -ne '/"language2"\s*:\s*"(.*)"/ and print $1' "$extra_metadata_file")
+  if [[ -n "$language2" && "$language2" == "$language" ]]; then
+    echo "@@@ Omitting language2 (duplicate of language [$language])" 1>&2
+    grep -v '"language2"' "$extra_metadata_file"
+  else
+    cat "$extra_metadata_file"
+  fi | sed -E 's/^[[:space:]]*/          /' >> "$json_file"
 
   cat >>"$json_file" <<EOF
         }
@@ -134,6 +172,7 @@ EOF
           "title": "$title",
           "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
           "language": "$language",
+$tintenfass_line
           "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename"
         }
       },
@@ -142,6 +181,13 @@ EOF
   fi
 
 done
+
+if [[ "$uploaded_count" -eq 0 ]]; then
+  echo "@@@@@ WARNING: No images were uploaded." 1>&2
+fi
+
+# Left/right trim whitespace inside every "key": "value" pair in the output JSON
+perl -i -pe 's/:[ \t]*"[ \t]*(.*?)[ \t]*"[ \t]*(,?)[ \t]*$/: "$1"$2/' "$json_file"
 
 echo "@@@@@ Output file [$json_file]. Copied to clipboard." 1>&2
 cat "$json_file" |pbcopy

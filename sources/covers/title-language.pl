@@ -128,6 +128,10 @@ else {
 $title =~ s/\s*PP-\d+//g;
 $language =~ s/\s*PP-\d+//g;
 
+# Scrub out chaff for Edition Tintenfaß downloads
+$title =~ s/\s*tintenfass[\s_-]*\d+//gi;
+$language =~ s/\s*tintenfass[\s_-]*\d+//gi;
+
 print <<"EOF";
 "$title"
 "$language"

@@ -60,7 +60,7 @@ for filename in $imagesdir/*; do
 
   base_filename=$(basename "$filename")
   canon_filename="${base_filename// /-}"
-  canon_filename="${base_filename//+/plus}"
+  canon_filename="${canon_filename//+/plus}"
 
   title="$base_filename"
   title="$(basename "$title" .jpeg)"
@@ -107,8 +107,15 @@ for filename in $imagesdir/*; do
   if [[ "$force" -eq 0 ]] && aws s3api head-object --bucket moocho-test --key "$large_key" >/dev/null 2>&1; then
     echo "@@@ WARNING: large image already exists, skipping upload (use -f to force) [$large_key]" 1>&2
   else
-    echo "@@@ Uploading large image [$canon_filename] to AWS (public-read)" 1>&2
-    aws s3 cp "$f1500" "s3://moocho-test/$large_key" --acl public-read >/dev/null
+    echo "@@@ Uploading large image [$canon_filename] to AWS" 1>&2
+    aws s3 cp "$f1500" "s3://moocho-test/$large_key" >/dev/null
+    if ! aws s3api put-object-acl \
+      --bucket moocho-test \
+      --key "$large_key" \
+      --grant-full-control emailaddress=carl@dragnon.com \
+      --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers >/dev/null 2>&1; then
+      echo "@@@ WARNING: Failed to set public ACL on s3://moocho-test/$large_key (object uploaded; bucket policy may still allow public read)" 1>&2
+    fi
     uploaded_count=$((uploaded_count + 1))
   fi
 
@@ -116,8 +123,15 @@ for filename in $imagesdir/*; do
   if [[ "$force" -eq 0 ]] && aws s3api head-object --bucket moocho-test --key "$small_key" >/dev/null 2>&1; then
     echo "@@@ WARNING: small image already exists, skipping upload (use -f to force) [$small_key]" 1>&2
   else
-    echo "@@@ Uploading small image [$canon_filename] to AWS (public-read)" 1>&2
-    aws s3 cp "$f150" "s3://moocho-test/$small_key" --acl public-read >/dev/null
+    echo "@@@ Uploading small image [$canon_filename] to AWS" 1>&2
+    aws s3 cp "$f150" "s3://moocho-test/$small_key" >/dev/null
+    if ! aws s3api put-object-acl \
+      --bucket moocho-test \
+      --key "$small_key" \
+      --grant-full-control emailaddress=carl@dragnon.com \
+      --grant-read uri=http://acs.amazonaws.com/groups/global/AllUsers >/dev/null 2>&1; then
+      echo "@@@ WARNING: Failed to set public ACL on s3://moocho-test/$small_key (object uploaded; bucket policy may still allow public read)" 1>&2
+    fi
     uploaded_count=$((uploaded_count + 1))
   fi
   # set +x

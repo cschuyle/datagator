@@ -161,27 +161,32 @@ for filename in $imagesdir/*; do
       combined_title="$title"
     fi
 
+    # Fold language2 into language: same -> keep one value; different -> comma-join.
+    # Never emit a separate language2 field.
+    language2=$(perl -ne '/"language2"\s*:\s*"(.*)"/ and print $1' "$extra_metadata_file")
+    if [[ -n "$language2" && "$language2" != "$language" ]]; then
+      combined_language="$language, $language2"
+      echo "@@@ Combining language [$language] and language2 [$language2]" 1>&2
+    else
+      combined_language="$language"
+      if [[ -n "$language2" ]]; then
+        echo "@@@ Omitting language2 (duplicate of language [$language])" 1>&2
+      fi
+    fi
+
     cat >>"$json_file" <<EOF
       {
         "littlePrinceItem": {
           "title": "$combined_title",
           "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
-          "language": "$language",
+          "language": "$combined_language",
 $tintenfass_line
           "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename",
 EOF
 
-  # The native title is now folded into the combined "title" above, so drop the
-  # metadata's own "title" line to avoid emitting it twice.
-  # Omit language2 if it duplicates the already-emitted language.
+  # Drop metadata title (folded above) and language2 (folded into language).
   # Re-indent appended metadata to 10 spaces so it lines up with the sibling fields.
-  metadata_filter='"title"'
-  language2=$(perl -ne '/"language2"\s*:\s*"(.*)"/ and print $1' "$extra_metadata_file")
-  if [[ -n "$language2" && "$language2" == "$language" ]]; then
-    echo "@@@ Omitting language2 (duplicate of language [$language])" 1>&2
-    metadata_filter="$metadata_filter|\"language2\""
-  fi
-  grep -Ev "$metadata_filter" "$extra_metadata_file" | sed -E 's/^[[:space:]]*/          /' >> "$json_file"
+  grep -Ev '"title"|"language2"' "$extra_metadata_file" | sed -E 's/^[[:space:]]*/          /' >> "$json_file"
 
   cat >>"$json_file" <<EOF
         }

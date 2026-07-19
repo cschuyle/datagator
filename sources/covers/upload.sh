@@ -152,25 +152,36 @@ for filename in $imagesdir/*; do
     cat "$extra_metadata_file" 1>&2
     echo "---" 1>&2
 
+    # Merge the native title from the metadata (e.g. "El Prencipicu") with the
+    # descriptive filename title, so a single "title" carries both.
+    metadata_title=$(perl -ne '/"title"\s*:\s*"(.*)"/ and print $1' "$extra_metadata_file")
+    if [[ -n "$metadata_title" ]]; then
+      combined_title="$metadata_title - $title"
+    else
+      combined_title="$title"
+    fi
+
     cat >>"$json_file" <<EOF
       {
         "littlePrinceItem": {
-          "title": "$title",
+          "title": "$combined_title",
           "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
           "language": "$language",
 $tintenfass_line
           "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename",
 EOF
 
+  # The native title is now folded into the combined "title" above, so drop the
+  # metadata's own "title" line to avoid emitting it twice.
   # Omit language2 if it duplicates the already-emitted language.
   # Re-indent appended metadata to 10 spaces so it lines up with the sibling fields.
+  metadata_filter='"title"'
   language2=$(perl -ne '/"language2"\s*:\s*"(.*)"/ and print $1' "$extra_metadata_file")
   if [[ -n "$language2" && "$language2" == "$language" ]]; then
     echo "@@@ Omitting language2 (duplicate of language [$language])" 1>&2
-    grep -v '"language2"' "$extra_metadata_file"
-  else
-    cat "$extra_metadata_file"
-  fi | sed -E 's/^[[:space:]]*/          /' >> "$json_file"
+    metadata_filter="$metadata_filter|\"language2\""
+  fi
+  grep -Ev "$metadata_filter" "$extra_metadata_file" | sed -E 's/^[[:space:]]*/          /' >> "$json_file"
 
   cat >>"$json_file" <<EOF
         }

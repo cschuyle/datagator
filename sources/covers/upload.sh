@@ -220,4 +220,4 @@ fi
 perl -i -pe 's/:[ \t]*"[ \t]*(.*?)[ \t]*"[ \t]*(,?)[ \t]*$/: "$1"$2/' "$json_file"
 
 echo "@@@@@ Output file [$json_file]. Copied to clipboard." 1>&2
-cat "$json_file" |pbcopy
+{ echo ":>>>>> From dg covers"; cat "$json_file"; } | pbcopy

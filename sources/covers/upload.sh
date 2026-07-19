@@ -140,8 +140,9 @@ for filename in $imagesdir/*; do
 
   lpid="$("${script_dir}/extract-lpid.pl" "${canon_filename}")"
   tintenfass_id="$("${script_dir}/extract-tintenfass-id.pl" "${canon_filename}")"
+  # Leading newline so an absent tintenfassId does not leave a blank line in the JSON.
   if [[ -n "$tintenfass_id" ]]; then
-    tintenfass_line="          \"tintenfassId\": \"$tintenfass_id\","
+    tintenfass_line=$'\n          "tintenfassId": "'"$tintenfass_id"'",'
   else
     tintenfass_line=""
   fi
@@ -179,8 +180,7 @@ for filename in $imagesdir/*; do
         "littlePrinceItem": {
           "title": "$combined_title",
           "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
-          "language": "$combined_language",
-$tintenfass_line
+          "language": "$combined_language",$tintenfass_line
           "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename",
 EOF
 
@@ -201,8 +201,7 @@ EOF
         "littlePrinceItem": {
           "title": "$title",
           "largeImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/1500/$canon_filename",
-          "language": "$language",
-$tintenfass_line
+          "language": "$language",$tintenfass_line
           "smallImageUrl": "https://moocho-test.s3-us-west-2.amazonaws.com/public/$bucket/images/150/$canon_filename"
         }
       },
